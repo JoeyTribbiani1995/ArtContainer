@@ -18,5 +18,9 @@
     <None Remove="ArtContainer.Data\obj\Debug\netcoreapp2.2\ArtContainer.Data.assets.cache" />
     <None Remove="ArtContainer.Services\obj\ArtContainer.Services.csproj.nuget.cache" />
     <None Remove="ArtContainer.Services\obj\project.assets.json" />
+    <None Remove="ArtContainer.Services\obj\Debug\netcoreapp2.2\ArtContainer.Services.csprojAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
   </ItemGroup>
 </Project>
