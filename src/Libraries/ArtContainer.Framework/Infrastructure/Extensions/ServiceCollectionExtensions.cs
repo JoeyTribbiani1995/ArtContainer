@@ -14,7 +14,7 @@ namespace ArtContainer.Framework.Infrastructure.Extensions
      IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
 
-            return serviceProvider;
+            return null;
         }
     }
 }
