@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ArtContainer.Data\Class1.cs" />
+    <Compile Remove="ArtContainer.Services\Class1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ArtContainer.Data\obj\ArtContainer.Data.csproj.nuget.cache" />
+    <None Remove="ArtContainer.Data\obj\ArtContainer.Data.csproj.nuget.g.props" />
+    <None Remove="ArtContainer.Data\obj\ArtContainer.Data.csproj.nuget.dgspec.json" />
+    <None Remove="ArtContainer.Data\obj\ArtContainer.Data.csproj.nuget.g.targets" />
+    <None Remove="ArtContainer.Data\obj\project.assets.json" />
+    <None Remove="ArtContainer.Data\obj\Debug\netcoreapp2.2\ArtContainer.Data.csprojAssemblyReference.cache" />
+    <None Remove="ArtContainer.Data\obj\Debug\netcoreapp2.2\ArtContainer.Data.assets.cache" />
+    <None Remove="ArtContainer.Services\obj\ArtContainer.Services.csproj.nuget.cache" />
+    <None Remove="ArtContainer.Services\obj\project.assets.json" />
+  </ItemGroup>
+</Project>
