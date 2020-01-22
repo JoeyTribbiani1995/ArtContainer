@@ -21,6 +21,14 @@
     <None Remove="ArtContainer.Services\obj\Debug\netcoreapp2.2\ArtContainer.Services.csprojAssemblyReference.cache" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Autofac" Version="4.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Infrastructure\DependencyManagement\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>

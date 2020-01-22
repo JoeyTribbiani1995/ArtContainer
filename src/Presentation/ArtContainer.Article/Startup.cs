@@ -11,16 +11,17 @@ namespace ArtContainer.Article
     public class Startup
     {
         #region Fields
-
         private readonly IConfiguration _configuration;
         private readonly IHostingEnvironment _hostingEnvironment;
-
         #endregion
 
-        public Startup(IConfiguration configuration)
+        #region Ctor
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
         }
+        #endregion
 
         /// <summary>
         /// Add services to the application and configure service provider
