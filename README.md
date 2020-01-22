@@ -7,7 +7,11 @@ This document is a guide for developers to the solution structure of art-contain
 - \Libraries\ArtContainer.Core project contains a set of core classes for art-container, such as caching, events, helpers, and business objects (for example, Article entities)
 - \Libraries\ArtContainer.Data project contains a set of classes and functions for reading from and writing to a database or other data store. It helps separate data-access logic from your business objects. art-container uses the Entity Framework (EF) Code-First approach. It allows you to define entities in the source code, and then get EF to generate the database from that. That's why it's called Code-First. You can then query your objects using LINQ, which gets translated to SQL behind the scenes and executed against the database. art-container use Fluent API to fully customize the persistence mapping.
 - \Libraries\ArtContainer.Services project contains a set of core services, business logic, validations or calculations related with the data, if needed. Some people call it Business Access Layer (BAL).
-2. Plugins
-3. Presenation
-- \Presentation\ArtContainer.API project contains some API to use for front-end
-4. Web
+- \Libraries\ArtContainer.Framework is using as libraries to endpoint
+2. Presenation
+- \Presentation\ArtContainer.Article project contains some API to use for front-end
+- \Presentation\ArtContainer.Customer project contains some API to use for front-end
+3. Web
+- \Web\client is a angular app
+4. Mobile
+- \Mobile\artcontainer_flutter is a for mobile
