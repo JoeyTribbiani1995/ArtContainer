@@ -1,31 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using ArtContainer.Framework.Infrastructure.Extensions;
 
 namespace ArtContainer.Article
 {
     public class Startup
     {
+        #region Fields
+
+        private readonly IConfiguration _configuration;
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        #endregion
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        /// <summary>
+        /// Add services to the application and configure service provider
+        /// </summary>
+        /// <param name="services">Collection of service descriptors</param>
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            return services.ConfigureApplicationServices(_configuration, _hostingEnvironment);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
