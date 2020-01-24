@@ -1,10 +1,8 @@
 ﻿using System;
 namespace ArtContainer.Core.Configuration
 {
-    public class ArtConfig
+    public partial class ArtConfig
     {
-        public ArtConfig()
-        {
-        }
+       
     }
 }

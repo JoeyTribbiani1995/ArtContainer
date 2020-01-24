@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using ArtContainer.Core.Configuration;
+using Autofac;
 
 namespace ArtContainer.Core.Infrastructure.DependencyManagement
 {
@@ -13,7 +14,7 @@ namespace ArtContainer.Core.Infrastructure.DependencyManagement
         /// <param name="builder">Container builder</param>
         /// <param name="typeFinder">Type finder</param>
         /// <param name="config">Config</param>
-        void Register(ContainerBuilder builder, ITypeFinder typeFinder, NopConfig config);
+        void Register(ContainerBuilder builder, ITypeFinder typeFinder, ArtConfig config);
 
         /// <summary>
         /// Gets order of this dependency registrar implementation
