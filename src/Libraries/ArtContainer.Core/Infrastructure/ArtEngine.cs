@@ -4,6 +4,8 @@ using ArtContainer.Core.Configuration;
 using ArtContainer.Core.Infrastructure.DependencyManagement;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +22,11 @@ namespace ArtContainer.Core.Infrastructure
         /// </summary>
         private IServiceProvider _serviceProvider { get; set; }
 
+        /// <summary>
+        /// Service provider
+        /// </summary>
+        public virtual IServiceProvider ServiceProvider => _serviceProvider;
+
         #endregion
 
         #region Methods
@@ -27,12 +34,44 @@ namespace ArtContainer.Core.Infrastructure
         {
             //find startup configurations provided by other assemblies
             var typeFinder = new WebAppTypeFinder();
+            var startupConfigurations = typeFinder.FindClassesOfType<IArticleStartup>();
+
+            //create and sort instances of startup configurations
+            var instances = startupConfigurations
+                .Select(startup => (IArticleStartup)Activator.CreateInstance(startup))
+                .OrderBy(startup => startup.Order);
+
+            //configure services
+            foreach (var instance in instances)
+                instance.ConfigureServices(services, configuration);
+
 
             //register dependencies
             RegisterDependencies(services, typeFinder, config);
 
             return _serviceProvider;
         }
+
+        /// <summary>
+        /// Configure HTTP request pipeline
+        /// </summary>
+        /// <param name="application">Builder for configuring an application's request pipeline</param>
+        public void ConfigureRequestPipeline(IApplicationBuilder application)
+        {
+            //find startup configurations provided by other assemblies
+            var typeFinder = Resolve<ITypeFinder>();
+            var startupConfigurations = typeFinder.FindClassesOfType<IArticleStartup>();
+
+            //create and sort instances of startup configurations
+            var instances = startupConfigurations
+                .Select(startup => (IArticleStartup)Activator.CreateInstance(startup))
+                .OrderBy(startup => startup.Order);
+
+            //configure request pipeline
+            foreach (var instance in instances)
+                instance.Configure(application);
+        }
+
         #endregion
 
         #region Utilities
@@ -50,7 +89,7 @@ namespace ArtContainer.Core.Infrastructure
             containerBuilder.RegisterInstance(this).As<IEngine>().SingleInstance();
 
             //register instance object type finder
-                                containerBuilder.RegisterInstance(typeFinder).As<ITypeFinder>().SingleInstance();
+            containerBuilder.RegisterInstance(typeFinder).As<ITypeFinder>().SingleInstance();
 
             // Once you've registered everything in the ServiceCollection, call
             // Populate to bring those registrations into Autofac. This is
@@ -74,6 +113,38 @@ namespace ArtContainer.Core.Infrastructure
             _serviceProvider = new AutofacServiceProvider(containerBuilder.Build());
 
             return _serviceProvider;
+        }
+
+        /// <summary>
+        /// Resolve dependency
+        /// </summary>
+        /// <typeparam name="T">Type of resolved service</typeparam>
+        /// <returns>Resolved service</returns>
+        public T Resolve<T>() where T : class
+        {
+            return (T)Resolve(typeof(T));
+        }
+
+
+        /// <summary>
+        /// Resolve dependency
+        /// </summary>
+        /// <param name="type">Type of resolved service</param>
+        /// <returns>Resolved service</returns>
+        public object Resolve(Type type)
+        {
+            return GetServiceProvider().GetService(type);
+        }
+
+        /// <summary>
+        /// Get IServiceProvider
+        /// </summary>
+        /// <returns>IServiceProvider</returns>
+        protected IServiceProvider GetServiceProvider()
+        {
+            var accessor = ServiceProvider.GetService<IHttpContextAccessor>();
+            var context = accessor.HttpContext;
+            return context?.RequestServices ?? ServiceProvider;
         }
 
         #endregion

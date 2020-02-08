@@ -1,7 +1,9 @@
 ﻿using System;
+using ArtContainer.Core;
 using ArtContainer.Core.Configuration;
 using ArtContainer.Core.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +19,12 @@ namespace ArtContainer.Framework.Infrastructure.Extensions
         {
             //add NopConfig configuration parameters
             var artConfig = services.ConfigureStartupConfig<ArtConfig>(configuration.GetSection("Art"));
+
+            //add accessor to HttpContext
+            services.AddHttpContextAccessor();
+
+            //create default file provider
+            CommonHelper.DefaultFileProvider = new ArtFileProvider(hostingEnvironment);
 
             //create engine and configure service provider
             var engine = EngineContext.Create();
@@ -51,5 +59,15 @@ namespace ArtContainer.Framework.Infrastructure.Extensions
 
             return config;
         }
+
+        /// <summary>
+        /// Register HttpContextAccessor
+        /// </summary>
+        /// <param name="services">Collection of service descriptors</param>
+        public static void AddHttpContextAccessor(this IServiceCollection services)
+        {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using ArtContainer.Core.Configuration;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,5 +21,12 @@ namespace ArtContainer.Core.Infrastructure
         /// <param name="config">Art configuration parameters</param>
         /// <returns>Service provider</returns>
         IServiceProvider ConfigureServices(IServiceCollection services, IConfiguration configuration, ArtConfig config);
+
+        /// <summary>
+        /// Configure HTTP request pipeline
+        /// </summary>
+        /// <param name="application">Builder for configuring an application's request pipeline</param>
+        void ConfigureRequestPipeline(IApplicationBuilder application);
+
     }
 }
