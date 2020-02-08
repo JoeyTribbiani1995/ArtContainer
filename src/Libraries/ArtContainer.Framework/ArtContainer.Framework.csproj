@@ -13,5 +13,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ArtContainer.Core\ArtContainer.Core.csproj" />
+    <ProjectReference Include="..\ArtContainer.Services\ArtContainer.Services.csproj" />
   </ItemGroup>
 </Project>

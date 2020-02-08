@@ -1,8 +1,8 @@
-﻿using System;
-using ArtContainer.Core.Configuration;
+﻿using ArtContainer.Core.Configuration;
 using ArtContainer.Core.Infrastructure;
 using ArtContainer.Core.Infrastructure.DependencyManagement;
 using Autofac;
+using ArtContainer.Services.Article;
 
 namespace ArtContainer.Framework.Infrastructure
 {
@@ -14,6 +14,9 @@ namespace ArtContainer.Framework.Infrastructure
         {
             //file provider
             builder.RegisterType<ArtFileProvider>().As<IArtFileProvider>().InstancePerLifetimeScope();
+
+            builder.RegisterType<ArticleService>().As<IArticleService>().InstancePerLifetimeScope();
+
         }
     }
 }

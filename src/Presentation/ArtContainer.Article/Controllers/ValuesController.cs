@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ArtContainer.Services.Article;
 
 namespace ArtContainer.Article.Controllers
 {
@@ -10,6 +11,13 @@ namespace ArtContainer.Article.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+
+        private readonly IArticleService _articleService;
+
+        public ValuesController(IArticleService articleService)
+        {
+            _articleService = articleService;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -21,7 +29,7 @@ namespace ArtContainer.Article.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return _articleService.GetAllArticle();
         }
 
         // POST api/values

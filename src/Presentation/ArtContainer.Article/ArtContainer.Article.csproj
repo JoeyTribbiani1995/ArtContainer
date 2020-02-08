@@ -17,6 +17,9 @@
     <ProjectReference Include="..\..\Libraries\ArtContainer.Framework\ArtContainer.Framework.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\ArtContainer.Services\ArtContainer.Services.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
