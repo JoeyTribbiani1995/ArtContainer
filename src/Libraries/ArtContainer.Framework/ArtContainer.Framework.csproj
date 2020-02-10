@@ -14,5 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ArtContainer.Core\ArtContainer.Core.csproj" />
     <ProjectReference Include="..\ArtContainer.Services\ArtContainer.Services.csproj" />
+    <ProjectReference Include="..\ArtContainer.Data\ArtContainer.Data.csproj" />
   </ItemGroup>
 </Project>

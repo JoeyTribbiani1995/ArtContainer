@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ArtContainer.Data.ObjectContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace ArtContainer.Framework.Infrastructure.Extensions
 {
@@ -67,6 +69,18 @@ namespace ArtContainer.Framework.Infrastructure.Extensions
         public static void AddHttpContextAccessor(this IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        }
+
+        /// <summary>
+        /// Register base object context
+        /// </summary>
+        /// <param name="services">Collection of service descriptors</param>
+        public static void AddArtObjectContext(this IServiceCollection services)
+        {
+            services.AddDbContextPool<ArtObjectContext>(optionsBuilder =>
+            {
+                optionsBuilder.UseSqlServerWithLazyLoading(services);
+            });
         }
 
     }
