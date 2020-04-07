@@ -19,10 +19,19 @@ namespace ArtContainer.Article.Controllers
             _articleService = articleService;
         }
         // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [HttpGet("GetTest/{id}")]
+        public ActionResult<IEnumerable<string>> GetTest(int id)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                TestTryCatch(id);
+                return new string[] { "value1", "value2" };
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // GET api/values/5
@@ -48,6 +57,14 @@ namespace ArtContainer.Article.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        private void TestTryCatch(int a)
+        {
+            if(a < 0)
+            {
+                throw new Exception("a less than 0");
+            }
         }
     }
 }
