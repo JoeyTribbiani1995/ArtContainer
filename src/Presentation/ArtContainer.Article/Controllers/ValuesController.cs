@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ArtContainer.Services.Article;
+using System.Collections;
 
 namespace ArtContainer.Article.Controllers
 {
@@ -30,7 +31,17 @@ namespace ArtContainer.Article.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                ResponseErrorObject errorObject = new ResponseErrorObject
+                {
+                    ErrorMessage = e.Message,
+                    HelpLink = e.HelpLink,
+                    Datas = new List<DictionaryEntry>()
+                };
+                foreach (DictionaryEntry dictionary in e.Data)
+                {
+                    errorObject.Datas.Add(dictionary);
+                }
+                return BadRequest(errorObject);
             }
         }
 
@@ -63,8 +74,20 @@ namespace ArtContainer.Article.Controllers
         {
             if(a < 0)
             {
-                throw new Exception("a less than 0");
+                Exception e =  new Exception("a less than 0");
+                e.Data.Add("value a", $"{a}");
+                e.HelpLink = "www.html.css";
+                throw e;
             }
         }
+    }
+
+    public class ResponseErrorObject
+    {
+        public List<DictionaryEntry> Datas { get; set; }
+
+        public string HelpLink { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }
