@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ArtContainer.Services.Article;
 using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ArtContainer.Article.Controllers
 {
@@ -19,6 +19,14 @@ namespace ArtContainer.Article.Controllers
         {
             _articleService = articleService;
         }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult<IEnumerable<string>> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
         // GET api/values
         [HttpGet("GetTest/{id}")]
         public ActionResult<IEnumerable<string>> GetTest(int id)

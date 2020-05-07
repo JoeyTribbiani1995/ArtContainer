@@ -14,12 +14,12 @@ namespace ArtContainer.Article
     {
         public static void Main(string[] args)
         {
-            var host = WebHost.CreateDefaultBuilder(args)
-                .UseKestrel(options => options.AddServerHeader = false)
+            BuildWebHost(args).Run();
+        }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
-
-            host.Run();
-        }
     }
 }

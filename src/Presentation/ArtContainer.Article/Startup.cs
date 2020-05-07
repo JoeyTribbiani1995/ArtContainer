@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,15 @@ namespace ArtContainer.Article
         /// <param name="services">Collection of service descriptors</param>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication("Bearer")
+           .AddJwtBearer("Bearer", options =>
+           {
+               options.Authority = "http://localhost:5000";
+               options.RequireHttpsMetadata = false;
+
+               options.Audience = "ApiArticle";
+           });
+
             return services.ConfigureApplicationServices(_configuration, _hostingEnvironment);
         }
 
@@ -42,9 +52,10 @@ namespace ArtContainer.Article
         /// Configure the application HTTP request pipeline
         /// </summary>
         /// <param name="application">Builder for configuring an application's request pipeline</param>
-        public void Configure(IApplicationBuilder application)
+        public void Configure(IApplicationBuilder app)
         {
-            application.ConfigureRequestPipeline();
+            app.UseAuthentication();
+            app.ConfigureRequestPipeline();
         }
     }
 }
