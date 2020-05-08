@@ -12,5 +12,29 @@
     <PackageReference Include="IdentityServer4" Version="3.1.3" />
 
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="System.Security.Principal" Version="4.3.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0-preview.3.20214.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\icon.jpg" />
+    <Content Remove="wwwroot\icon.png" />
+    <Content Remove="wwwroot\css\site.css" />
+    <Content Remove="wwwroot\css\site.less" />
+    <Content Remove="wwwroot\css\site.min.css" />
+    <Content Remove="wwwroot\js\signin-redirect.js" />
+    <Content Remove="wwwroot\js\signout-redirect.js" />
+    <Content Remove="wwwroot\lib\jquery\jquery.js" />
+    <Content Remove="wwwroot\lib\jquery\jquery.min.js" />
+    <Content Remove="wwwroot\lib\jquery\jquery.min.map" />
+    <Content Remove="wwwroot\lib\bootstrap\css\bootstrap.css" />
+    <Content Remove="wwwroot\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Remove="wwwroot\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Remove="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Remove="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Remove="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Remove="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Remove="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Remove="wwwroot\lib\bootstrap\js\bootstrap.js" />
+    <Content Remove="wwwroot\lib\bootstrap\js\bootstrap.min.js" />
   </ItemGroup>
 </Project>
